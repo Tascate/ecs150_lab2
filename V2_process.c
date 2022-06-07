@@ -99,7 +99,7 @@ void runio(void) {
         sysIO->idle += 1;
 	return;
     }
-    else if(sysio->status == 0){ //I/O device inactive, move first process of I/O list into I/O device
+    else if(iodev == NULL){ //I/O device inactive, move first process of I/O list into I/O device
         struct process* currentProcess = io_queue->head;
 	movetoiodev(currentProcess);
     }
