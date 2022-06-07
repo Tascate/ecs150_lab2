@@ -85,11 +85,18 @@ void displayResource(struct resource* res) {
 
 void movetoiodev(struct process *ptr) {
     iodev = ptr;
+    // determine runtime
+
+    // Update process I/O runtime, total IO busy runtime
+    ptr->doingIO = ptr->doingIO + io_runtime;
+    sysIO->busy = sysIO->busy + io_run_time; 
+    return;
 }
 
 void runio(void) {
     if(io_queue->count == 0 && iodev == NULL) { //I/O list empty AND I/O device is empty
-        return;
+        sysIO->idle += 1;
+	return;
     }
     else if(sysio->status == 0){ //I/O device inactive, move first process of I/O list into I/O device
         struct process* currentProcess = io_queue->head;
@@ -98,19 +105,12 @@ void runio(void) {
     else if(ready_queue->count == 0) { //ready list is empty
         // TODO: check CPU
     }
-    else if{ // move first item in I/O queue to I/O device
-        struct process* currentProcess = io_queue->head;
-	movetoiodev(currentProcess);
-    }
-
-    // TODO: determine how long process blocks for I/O
-    //int io_run_time = ?????????
-    iodev->doingIO = iodev->doingIO + io_run_time;
-    
+	
     // if process has completed its I/O, move to ready queue
     queue_dequeue(io_queue, (void**)&iodev);
     queue_enqueue(ready_queue, iodev);
     iodev = NULL; // move current process of I/O device
+    sysIO->idle += 1;
     return;
 }
 
