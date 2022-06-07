@@ -109,9 +109,6 @@ void runio(int remaining_runtime) {
         struct process* currentProcess = io_queue->head;
 	movetoiodev(remaining_runtime, currentProcess);
     }
-    else if(io_queue->count == 0) { //I/O list is empty
-        return;
-    }
 	
     // if process has completed its I/O, move to ready queue
     queue_dequeue(io_queue, (void**)&iodev);
