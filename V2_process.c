@@ -86,6 +86,7 @@ void displayResource(struct resource* res) {
 void movetoiodev(struct process *ptr) {
     iodev = ptr;
     // determine runtime
+    int io_runtime; 
 
     // Update process I/O runtime, total IO busy runtime
     ptr->doingIO = ptr->doingIO + io_runtime;
