@@ -1,7 +1,6 @@
 // Update to file suba posted
 // Created two new functions: movetoiodev and runio; both still a work in progress
 // still need to determine how long process block for I/O
-// Also, added status as new attribute to resource struct; I think it might be necessary
 
 #include <assert.h>
 #include <stdio.h>
@@ -20,7 +19,6 @@ struct process {
 
 struct resource {
     char *name; // CPU or IO
-    int status; //0 if idle, 1 if busy
     int busy;
     int idle;
     double utilization; // busy / (busy + idle)
