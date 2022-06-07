@@ -91,7 +91,7 @@ void movetoiodev(int remaining_runtime, struct process *ptr) {
         io_runtime = 1;
     }
     else{ 
-	 // generate random number
+	 // TODO: generate random number
     }
 
     // Update process I/O runtime, total IO busy runtime
