@@ -1,5 +1,5 @@
 // Update to file suba posted
-// Created two new functions: movetoiodev and runio; both still a work in progress
+// Created two new functions: movetoiodev and runio
 // still need to determine how long process block for I/O
 
 #include <assert.h>
@@ -102,8 +102,8 @@ void runio(void) {
         struct process* currentProcess = io_queue->head;
 	movetoiodev(currentProcess);
     }
-    else if(ready_queue->count == 0) { //ready list is empty
-        // TODO: check CPU
+    else if(io_queue->count == 0) { //I/O list is empty
+        return;
     }
 	
     // if process has completed its I/O, move to ready queue
