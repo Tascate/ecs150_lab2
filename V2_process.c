@@ -1,4 +1,4 @@
-// Update to file suba posted
+// Updates to file suba posted
 // Created two new functions: movetoiodev and runio
 // still need to determine how long process block for I/O
 
