@@ -127,17 +127,18 @@ int main( int argc, char *argv[] ) {
     
     // If three arguments not included, complain and exit
     if ( argc != 3 ) {
-        return EXIT_FAILURE;
+        return (1);
     }
 	
     // If 2nd argument isn't -r or -f 
     if (strcmp(argv[1],"-r") != 0 && strcmp(argv[1],"-f") != 0) {
         fprintf(stderr, "Usage: ./prsim [-r | -f] file\n");
+	return (1);
     }
 	
     FILE *file = fopen(argv[2], "r");
     if (!file) {
-        return EXIT_FAILURE;
+        return (1);
     }
 	
     // Get each line
@@ -146,15 +147,19 @@ int main( int argc, char *argv[] ) {
         total_args_read = sscanf(line, "%s %d %f", proc_name, &proc_run_time, &proc_block_prob);
         if (total_args_read != 3) {
 		fprintf(stderr, "Malformed line %s(%d)\n", argv[2], line_num);
+		return (1);
 	}
 	if (strlen(proc_name) > 10) {
 		fprintf(stderr, "name is too long %s(%d)\n", argv[2], line_num);
+		return (1);
 	}
 	if (proc_run_time <= 0) {
 		fprintf(stderr, "runtime is not positive integer %s(%d)\n", argv[2], line_num);
+		return (1);
 	}
 	if (proc_block_prob < 0 || proc_block_prob > 1) {
 		fprintf(stderr, "probability <0 or >1 %s(%d)\n", argv[2], line_num);
+		return (1);
 	}
     }
 	
@@ -211,7 +216,7 @@ int main( int argc, char *argv[] ) {
                     int ioblock_count = 0;
                     int io_time = 0;
 
-                    struct process* stats = generateProcess(cpu->name, cpu->completeTime, clock, ioblock_count, io_time);
+                    struct process* stats = generateProcess(cpu->name, cpu->completeTime, clock, ioblock_count, io_time); // <- missing an argument
                     queue_enqueue(stats_queue, stats);
                     //move task off cpu
                     cpu = NULL;
