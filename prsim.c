@@ -164,12 +164,11 @@ int main( int argc, char *argv[] ) {
 	    return (1);
     }
 
-    char workingdir[9999];
-    getcwd(workingdir,999);
+    char workingdir[MAX_LENGTH];
+    getcwd(workingdir,MAX_LENGTH);
 
     strcat(workingdir,"/");
     strcat(workingdir,argv[2]);
-    printf("%s\n",workingdir);
 	
     FILE *file = fopen(workingdir, "r");
     if (!file) {
