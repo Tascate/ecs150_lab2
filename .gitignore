@@ -1,3 +1,11 @@
 process
+prism
 .vscode
 process.dSYM
+build
+CMakeLists.txt
+file1
+file2
+file3
+file4
+file5
