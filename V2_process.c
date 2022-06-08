@@ -151,7 +151,6 @@ int main( int argc, char *argv[] ) {
 	if (proc_block_prob < 0 || proc_block_prob > 1) {
 		fprintf(stderr, "probability <0 or >1 %s(%d)\n", argv[2], line_num);
 	}
-	
     }
 	
     // FCFS
