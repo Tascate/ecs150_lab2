@@ -122,7 +122,7 @@ void runio(int remaining_runtime) {
 int main( int argc, char *argv[] ) {
     int MAX_LENGTH = 80;
     int line_num, proc_run_time, total_args_read;
-    char proc_name[MAX_LENGTH];
+    char proc_name[MAX_LENGTH], line[MAX_LENGTH];
     float proc_block_prob;
     
     // If three arguments not included, complain and exit
@@ -148,7 +148,7 @@ int main( int argc, char *argv[] ) {
 	if (proc_run_time <= 0) {
 		fprintf(stderr, "runtime is not positive integer %s(%d)\n", argv[2], line_num);
 	}
-	if (proc_block_prob < 0 or proc_block_prob > 1) {
+	if (proc_block_prob < 0 || proc_block_prob > 1) {
 		fprintf(stderr, "probability <0 or >1 %s(%d)\n", argv[2], line_num);
 	}
 	
