@@ -97,7 +97,7 @@ void movetoiodev(int remaining_runtime, struct process *ptr) {
 
     // Update process I/O runtime, total IO busy runtime
     ptr->doingIO = ptr->doingIO + io_runtime;
-    sysIO->busy = sysIO->busy + io_run_time; 
+    sysIO->busy = sysIO->busy + io_runtime; 
     return;
 }
 
@@ -128,8 +128,13 @@ int main( int argc, char *argv[] ) {
     // If three arguments not included, complain and exit
     if ( argc != 3 ) {
         return EXIT_FAILURE;
-    }  
-    
+    }
+	
+    // If 2nd argument isn't -r or -f 
+    if (strcmp(argv[1],"-r") != 0 && strcmp(argv[1],"-f") != 0) {
+        fprintf(stderr, "Usage: ./prsim [-r | -f] file\n");
+    }
+	
     FILE *file = fopen(argv[2], "r");
     if (!file) {
         return EXIT_FAILURE;
