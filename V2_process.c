@@ -134,7 +134,7 @@ int main( int argc, char *argv[] ) {
     if (!file) {
         return EXIT_FAILURE;
     }
-
+	
     // Get each line
     while (fgets(line, MAX_LENGTH, file)) {  
         line_num++;
