@@ -209,6 +209,7 @@ int main( int argc, char *argv[] ) {
     sysIO = buildResource("IO",0,0,0);
     int process_count = ready_queue->count;
     
+    setupProcessTable();
     //ready_queue filled
     while (ready_queue->count > 0 || io_queue->count > 0 || cpu != NULL || iodev != NULL) {
         runCPU();
@@ -219,7 +220,7 @@ int main( int argc, char *argv[] ) {
 
     /* print clock time at end */
 	printf("\nSystem:\n");
-	printf("The wall clock time at which the simulation finished: %d\n\n", 75);
+	printf("The wall clock time at which the simulation finished: %d\n", clock-1);
 
     //calc values off idle + busy time
     calcResourceStats(sysCPU, process_count);
