@@ -119,7 +119,41 @@ void runio(int remaining_runtime) {
     return;
 }
 
-int main(void) {
+int main( int argc, char *argv[] ) {
+    int MAX_LENGTH = 80;
+    int line_num, proc_run_time, total_args_read;
+    char proc_name[MAX_LENGTH];
+    float proc_block_prob;
+    
+    // If three arguments not included, complain and exit
+    if ( argc != 3 ) {
+        return EXIT_FAILURE;
+    }  
+    
+    FILE *file = fopen(argv[2], "r");
+    if (!file) {
+        return EXIT_FAILURE;
+    }
+
+    // Get each line
+    while (fgets(line, MAX_LENGTH, file)) {  
+        line_num++;
+        total_args_read = sscanf(line, "%s %d %f", proc_name, &proc_run_time, &proc_block_prob);
+        if (total_args_read != 3) {
+		fprintf(stderr, "Malformed line %s(%d)\n", argv[2], line_num);
+	}
+	if (strlen(proc_name) > 10) {
+		fprintf(stderr, "name is too long %s(%d)\n", argv[2], line_num);
+	}
+	if (proc_run_time <= 0) {
+		fprintf(stderr, "runtime is not positive integer %s(%d)\n", argv[2], line_num);
+	}
+	if (proc_block_prob < 0 or proc_block_prob > 1) {
+		fprintf(stderr, "probability <0 or >1 %s(%d)\n", argv[2], line_num);
+	}
+	
+    }
+	
     // FCFS
     (void) srandom(12345);
     ready_queue = queue_create();
